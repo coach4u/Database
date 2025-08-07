@@ -1,0 +1,42 @@
+Migration of an on-premise Oracle database to Amazon Aurora PostgreSQL using AWS Database Migration Service (DMS)
+
+1)Identify Source Database Connectivity
+	Collect the hostname/IP and port (default Oracle port is 1521) of the on-premise Oracle database.
+	Ensure it is reachable from AWS (consider VPN, Direct Connect).
+
+2)Provision Aurora PostgreSQL Database
+	Create an Aurora PostgreSQL-compatible cluster.
+	Create the required schema manually (DMS does not create schema objects like users, tablespaces, etc.)or use schema conversion tool.
+
+3) Store Database Credentials in AWS Secrets Manager
+	Store both source (Oracle) and target (Aurora PostgreSQL) credentials as secrets.
+
+4)Create IAM Role for DMS
+       Ensure the DMS replication instance has network connectivity to both source and target.
+
+5)In dms,Create Replication Instance.
+	Select appropriate instance size based on database size and throughput
+	Place in the same VPC as Aurora 
+
+6)Open port 1521 (Oracle) and 5432 (PostgreSQL) in respective security groups.Ensure the DMS replication instance has network connectivity to both source and target.
+
+7)Create Source Endpoint (Oracle)
+        Choose Oracle as engine.
+        Reference the secret stored in AWS Secrets Manager for credentials.
+	Enter server/port/SID or service name.
+	Test connection using replication instance.
+
+8)Create Target Endpoint (Aurora PostgreSQL)
+	Create Target Endpoint (Aurora PostgreSQL)
+        Use secret stored in Secrets Manager for credentials.
+	Provide host/port/db name.
+	Test connection using replication instance.
+
+9)Create and Run Migration Task
+	Migration Type: Full Load 
+ 	Source and Target endpoints
+	Associate the IAM Role 
+  select the s3 bucket.
+
+  Error Encountered :
+    Cannot connect to ODBC provider network error has occured,SQL_ERROR SqlStat:08001 NativeError: 101 Message:timeout expired.
