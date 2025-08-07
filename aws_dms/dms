@@ -12,9 +12,8 @@ Migration of an on-premise Oracle database to Amazon Aurora PostgreSQL using AWS
 	Store both source (Oracle) and target (Aurora PostgreSQL) credentials as secrets.
 
 4)Create IAM Role for DMS
-       Ensure the DMS replication instance has network connectivity to both source and target.
-
-5)In dms,Create Replication Instance.
+       
+5)Create Replication Instance.
 	Select appropriate instance size based on database size and throughput
 	Place in the same VPC as Aurora 
 
