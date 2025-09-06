@@ -23,14 +23,16 @@ Migration of an on-premise Oracle database to Amazon Aurora PostgreSQL using AWS
         Choose Oracle as engine.
         Reference the secret stored in AWS Secrets Manager for credentials.
 	    Enter server/port/SID or service name.
-	    Test connection using replication instance.
+        check for the ssl certificate (options are none and verify-ca)(when using cloudformation ssl_mode option)
+	    Test connection using replication instance. (works in UI)
        
      
 8)Create Target Endpoint (Aurora PostgreSQL)
 	Create Target Endpoint (Aurora PostgreSQL)
         Use secret stored in Secrets Manager for credentials.
 	Provide host/port/db name.
-	Test connection using replication instance.
+    check for the ssl certificate (when using cloudformation ssl_mode option)
+	Test connection using replication instance.(works in UI)
 
 
 9)Create and Run Migration Task
@@ -40,6 +42,7 @@ Migration of an on-premise Oracle database to Amazon Aurora PostgreSQL using AWS
   select the s3 bucket.
 
  configure the asm if needed.
+  
 
   Error Encountered :
     Cannot connect to ODBC provider network error has occured,SQL_ERROR SqlStat:08001 NativeError: 101 Message:timeout expired.
