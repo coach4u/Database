@@ -42,7 +42,8 @@ Migration of an on-premise Oracle database to Amazon Aurora PostgreSQL using AWS
   select the s3 bucket.
 
  configure the asm if needed.
-  
+ check the ssl option by running lsnrctl status @ oracle server.
+ upload the certificate in dms certificate if needed. 
 
   Error Encountered :
     Cannot connect to ODBC provider network error has occured,SQL_ERROR SqlStat:08001 NativeError: 101 Message:timeout expired.
